@@ -18,10 +18,19 @@ public class EnumValue
 
   /**
    * Get the managed value (enum entry code).
-   * @return A value or <code>null</code>).
+   * @return A value or <code>null</code>.
    */
   public Integer getValue()
   {
     return _value;
+  }
+
+  /**
+   * Set the enum value (code).
+   * @param value A value or <code>null</code>).
+   */
+  public void setValue(Integer value)
+  {
+    _value=value;
   }
 }

@@ -53,4 +53,14 @@ public class StructValue
   {
     return _values.containsKey(name);
   }
+
+  /**
+   * Set a value.
+   * @param key Key.
+   * @param value Value.
+   */
+  public void setValue(String key, Object value)
+  {
+    _values.put(key,value);
+  }
 }

@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * An array value.
- * @author DAL
+ * @author DAM
  */
 public class ArrayValue
 {
@@ -17,6 +17,15 @@ public class ArrayValue
   public ArrayValue()
   {
     _values=new ArrayList<Object>();
+  }
+
+  /**
+   * Add a value.
+   * @param value Value to add (may be <code>null</code>).
+   */
+  public void addValue(Object value)
+  {
+    _values.add(value);
   }
 
   /**

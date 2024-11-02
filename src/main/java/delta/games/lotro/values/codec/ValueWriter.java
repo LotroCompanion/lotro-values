@@ -1,5 +1,6 @@
 package delta.games.lotro.values.codec;
 
+import java.util.BitSet;
 import java.util.List;
 
 import delta.games.lotro.values.ArrayValue;
@@ -17,7 +18,7 @@ public class ValueWriter
    * @param value Value to encode.
    * @return the encoded string.
    */
-  public static String getValue(Object value)
+  public static String write(Object value)
   {
     StringBuilder sb=new StringBuilder();
     writeValue(sb,value);
@@ -30,15 +31,31 @@ public class ValueWriter
     {
       sb.append("null");
     }
-    // Long, Integer, Float
-    if (value instanceof Number)
+    else if (value instanceof Integer)
     {
       sb.append(value);
+    }
+    else if (value instanceof Long)
+    {
+      sb.append(value).append('L');
+    }
+    else if (value instanceof Float)
+    {
+      sb.append(value).append('f');
+    }
+    else if (value instanceof String)
+    {
+      writeEscapedString(sb,(String)value);
+    }
+    else if (value instanceof BitSet)
+    {
+      writeBitSet(sb,(BitSet)value);
     }
     else if (value instanceof EnumValue)
     {
       EnumValue enumValue=(EnumValue)value;
       Integer intValue=enumValue.getValue();
+      sb.append('e');
       writeValue(sb,intValue);
     }
     else if (value instanceof ArrayValue)
@@ -49,16 +66,53 @@ public class ValueWriter
     {
       writeStructValue(sb,(StructValue)value);
     }
+    else
+    {
+      String msg="Unmanaged value type: "+value.getClass()+": "+value;
+      throw new IllegalStateException(msg);
+    }
+  }
+
+  private static void writeEscapedString(StringBuilder sb, String stringValue)
+  {
+    sb.append('"');
+    if (stringValue.indexOf('"')!=-1)
+    {
+      stringValue=stringValue.replace("\"","\\\"");
+    }
+    sb.append(stringValue).append('"');
+  }
+
+  private static void writeBitSet(StringBuilder sb, BitSet bitSet)
+  {
+    sb.append('(');
+    int size=bitSet.size();
+    boolean isFirst=true;
+    for(int i=0;i<size;i++)
+    {
+      if (bitSet.get(i))
+      {
+        if (!isFirst)
+        {
+          sb.append(',');
+        }
+        isFirst=false;
+        sb.append(i);
+      }
+    }
+    sb.append(')');
   }
 
   private static void writeArrayValue(StringBuilder sb, ArrayValue arrayValue)
   {
     sb.append('[');
     int size=arrayValue.getSize();
-    sb.append(size);
     for(int i=0;i<size;i++)
     {
-      sb.append(';');
+      if (i>0)
+      {
+        sb.append(',');
+      }
       writeValue(sb,arrayValue.getValueAt(i));
     }
     sb.append(']');
@@ -76,7 +130,8 @@ public class ValueWriter
       {
         sb.append(',');
       }
-      sb.append('"').append(key).append('"').append('=');
+      writeEscapedString(sb,key);
+      sb.append(':');
       writeValue(sb,value);
       index++;
     }
