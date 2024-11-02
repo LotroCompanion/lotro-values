@@ -63,11 +63,11 @@ class TestValueReader
   void testStringReading()
   {
     // Empty string
-    assertEquals("",read("\"\""));
+    assertEquals("",read("''"));
     // String
-    assertEquals("toto",read("\"toto\""));
+    assertEquals("toto",read("'toto'"));
     // String with double-quote
-    assertEquals("to\"to",read("\"to\\\"to\""));
+    assertEquals("to\'to",read("'to\\'to'"));
   }
 
   @Test
@@ -111,7 +111,7 @@ class TestValueReader
     }
     // Struct with 1 value
     {
-      Object readValue=read("{\"toto\":1}");
+      Object readValue=read("{'toto':1}");
       assertTrue(readValue instanceof StructValue);
       StructValue readStruct=(StructValue)readValue;
       assertEquals(1,readStruct.getKeys().size());
@@ -120,7 +120,7 @@ class TestValueReader
     }
     // Array with 2 values
     {
-      Object readValue=read("{\"toto\":1,\"titi\":\"tata\"}");
+      Object readValue=read("{'toto':1,'titi':'tata'}");
       assertTrue(readValue instanceof StructValue);
       StructValue readStruct=(StructValue)readValue;
       assertEquals(2,readStruct.getKeys().size());

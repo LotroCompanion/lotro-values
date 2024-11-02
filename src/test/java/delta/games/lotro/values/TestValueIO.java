@@ -22,11 +22,11 @@ class TestValueIO
   @Test
   void testStrings()
   {
-    testReadWrite("\"\"");
-    testReadWrite("\"toto\"");
-    testReadWrite("\"to\\\"to\"");
-    testReadWrite("\"\\\"toto\"");
-    testReadWrite("\"toto\\\"\"");
+    testReadWrite("''");
+    testReadWrite("'toto'");
+    testReadWrite("'to\\'to'");
+    testReadWrite("'\\'toto'");
+    testReadWrite("'toto\\''");
   }
 
   @Test
@@ -46,7 +46,7 @@ class TestValueIO
     testReadWrite("[1,2]");
     testReadWrite("[e1]");
     testReadWrite("[e1,e2]");
-    testReadWrite("[1,{\"toto\":1}]");
+    testReadWrite("[1,{'toto':1}]");
     testReadWrite("[null]");
   }
 
@@ -54,8 +54,8 @@ class TestValueIO
   void testStructs()
   {
     testReadWrite("{}");
-    testReadWrite("{\"to\\\"to\":1}");
-    testReadWrite("{\"titi\":[1,2],\"to\\\"to\":1}"); // Keys shall be ordered
+    testReadWrite("{'to\\'to':1}");
+    testReadWrite("{'titi':[1,2],'to\\'to':1}"); // Keys shall be ordered
   }
 
   @Test

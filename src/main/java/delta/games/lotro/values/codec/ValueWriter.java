@@ -75,12 +75,12 @@ public class ValueWriter
 
   private static void writeEscapedString(StringBuilder sb, String stringValue)
   {
-    sb.append('"');
-    if (stringValue.indexOf('"')!=-1)
+    sb.append('\'');
+    if (stringValue.indexOf('\'')!=-1)
     {
-      stringValue=stringValue.replace("\"","\\\"");
+      stringValue=stringValue.replace("'","\\'");
     }
-    sb.append(stringValue).append('"');
+    sb.append(stringValue).append('\'');
   }
 
   private static void writeBitSet(StringBuilder sb, BitSet bitSet)

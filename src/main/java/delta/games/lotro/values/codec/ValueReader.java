@@ -37,7 +37,7 @@ public class ValueReader
   private Object read(StringReader r)
   {
     char firstChar=r.peek();
-    if (firstChar=='"')
+    if (firstChar=='\'')
     {
       return readStringValue(r);
     }
@@ -67,7 +67,7 @@ public class ValueReader
 
   private String readStringValue(StringReader r)
   {
-    r.readExpectedChar('"');
+    r.readExpectedChar('\'');
     StringBuilder sb=new StringBuilder();
     while (true)
     {
@@ -77,7 +77,7 @@ public class ValueReader
         r.skip(1);
         sb.append(r.readChar());
       }
-      else if (nextChar=='"')
+      else if (nextChar=='\'')
       {
         r.skip(1);
         break;
