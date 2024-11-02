@@ -47,6 +47,10 @@ public class ValueWriter
     {
       writeEscapedString(sb,(String)value);
     }
+    else if (value instanceof Boolean)
+    {
+      writeBoolean(sb,(Boolean)value);
+    }
     else if (value instanceof BitSet)
     {
       writeBitSet(sb,(BitSet)value);
@@ -81,6 +85,11 @@ public class ValueWriter
       stringValue=stringValue.replace("'","\\'");
     }
     sb.append(stringValue).append('\'');
+  }
+
+  private static void writeBoolean(StringBuilder sb, Boolean booleanValue)
+  {
+    sb.append(booleanValue==Boolean.TRUE);
   }
 
   private static void writeBitSet(StringBuilder sb, BitSet bitSet)

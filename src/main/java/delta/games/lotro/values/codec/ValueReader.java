@@ -62,6 +62,16 @@ public class ValueReader
       r.readExpectedString("null");
       return null;
     }
+    else if (firstChar=='t')
+    {
+      r.readExpectedString("true");
+      return Boolean.TRUE;
+    }
+    else if (firstChar=='f')
+    {
+      r.readExpectedString("false");
+      return Boolean.FALSE;
+    }
     return readNumber(r);
   }
 
