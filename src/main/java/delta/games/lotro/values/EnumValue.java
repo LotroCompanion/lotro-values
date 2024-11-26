@@ -6,21 +6,40 @@ package delta.games.lotro.values;
  */
 public class EnumValue
 {
-  private Integer _value;
+  private int _enumId;
+  private int _value;
 
   /**
    * Constructor.
    */
   public EnumValue()
   {
-    _value=null;
+    _value=0;
+  }
+
+  /**
+   * Get the enum identifier.
+   * @return the enum identifier.
+   */
+  public int getEnumId()
+  {
+    return _enumId;
+  }
+
+  /**
+   * Set the enum identifier.
+   * @param enumId Identifier to set.
+   */
+  public void setEnumId(int enumId)
+  {
+    _enumId=enumId;
   }
 
   /**
    * Get the managed value (enum entry code).
-   * @return A value or <code>null</code>.
+   * @return A value.
    */
-  public Integer getValue()
+  public int getValue()
   {
     return _value;
   }
@@ -29,7 +48,7 @@ public class EnumValue
    * Set the enum value (code).
    * @param value A value or <code>null</code>).
    */
-  public void setValue(Integer value)
+  public void setValue(int value)
   {
     _value=value;
   }

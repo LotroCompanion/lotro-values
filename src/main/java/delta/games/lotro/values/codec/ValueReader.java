@@ -181,9 +181,12 @@ public class ValueReader
   private EnumValue readEnumValue(StringReader r)
   {
     r.readExpectedChar('e');
+    int enumId=readInt(r);
+    r.readExpectedChar(':');
     int value=readInt(r);
     EnumValue ret=new EnumValue();
-    ret.setValue(Integer.valueOf(value));
+    ret.setEnumId(enumId);
+    ret.setValue(value);
     return ret;
   }
 

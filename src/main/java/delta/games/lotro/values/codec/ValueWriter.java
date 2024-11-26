@@ -58,9 +58,12 @@ public class ValueWriter
     else if (value instanceof EnumValue)
     {
       EnumValue enumValue=(EnumValue)value;
-      Integer intValue=enumValue.getValue();
       sb.append('e');
-      writeValue(sb,intValue);
+      int enumId=enumValue.getEnumId();
+      sb.append(enumId);
+      sb.append(':');
+      int intValue=enumValue.getValue();
+      sb.append(intValue);
     }
     else if (value instanceof ArrayValue)
     {

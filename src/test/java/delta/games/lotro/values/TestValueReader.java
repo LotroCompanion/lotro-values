@@ -49,11 +49,13 @@ class TestValueReader
   void testReadEnum()
   {
     // OK
-    Object value=read("e1");
+    Object value=read("e2:1");
     assertTrue(value instanceof EnumValue);
     EnumValue enumValue=(EnumValue)value;
-    assertEquals(Integer.valueOf(1),enumValue.getValue());
+    assertEquals(2,enumValue.getEnumId());
+    assertEquals(1,enumValue.getValue());
     // Bad
+    checkFails("e1");
     checkFails("ea");
     checkFails("e");
     checkFails("e");

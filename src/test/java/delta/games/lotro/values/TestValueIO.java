@@ -44,8 +44,8 @@ class TestValueIO
     testReadWrite("[]");
     testReadWrite("[1]");
     testReadWrite("[1,2]");
-    testReadWrite("[e1]");
-    testReadWrite("[e1,e2]");
+    testReadWrite("[e2:1]");
+    testReadWrite("[e2:1,e3:2]");
     testReadWrite("[1,{'toto':1}]");
     testReadWrite("[null]");
   }
