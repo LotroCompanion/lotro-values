@@ -52,4 +52,21 @@ public class EnumValue
   {
     _value=value;
   }
+
+  @Override
+  public int hashCode()
+  {
+    return _enumId+_value;
+  }
+
+  @Override
+  public boolean equals(Object obj)
+  {
+    if (!(obj instanceof EnumValue))
+    {
+      return false;
+    }
+    EnumValue other=(EnumValue)obj;
+    return (other._enumId==_enumId) && (other._value==_value);
+  }
 }
